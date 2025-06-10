@@ -158,14 +158,14 @@ body {
 .player-counter-container.row-layout {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.3rem;
   flex-wrap: wrap; /* モバイル用に折り返し可 */
   margin-top: 1.5rem;
 }
 .player-counter-box {
   background-color: #10b981; /* 統一感ある緑色 */
   color: white;
-  padding: 0.5rem 0.8rem;
+  padding: 0rem 0rem;
   border-radius: 0.8rem;
   display: flex;
   align-items: center;

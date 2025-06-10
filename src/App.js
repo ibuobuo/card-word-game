@@ -100,8 +100,12 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ paddingTop: "0.5rem" }}>
       <h1>∩ゲーム</h1>
+
+      {eventMessage && (
+        <div className="event-popup">{eventMessage}</div>
+      )}
 
       <div className="selector">
         <label>カード枚数: </label>
@@ -146,10 +150,6 @@ export default function App() {
       </div>
 
       {renderPlayerCounters()}
-
-      {eventMessage && (
-        <div className="event-popup">{eventMessage}</div>
-      )}
     </div>
   );
 }
