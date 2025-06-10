@@ -37,6 +37,8 @@ const getRandomCombination = (all, used, count) => {
 
 export default function App() {
   const [cardCount, setCardCount] = useState(2);
+  const [playerCount, setPlayerCount] = useState(2);
+  const [playerScores, setPlayerScores] = useState([0, 0]);
   const [usedCombinations, setUsedCombinations] = useState(new Set());
   const [conditions, setConditions] = useState(() => {
     const initial = getRandomCombination(allConditions, new Set(), cardCount);
@@ -60,31 +62,46 @@ export default function App() {
     }
   };
 
+  const handleScoreChange = (index, delta) => {
+    const updatedScores = [...playerScores];
+    updatedScores[index] += delta;
+    setPlayerScores(updatedScores);
+  };
+
   const renderCards = () => {
-    if (cardCount === 3 && conditions.length === 3) {
-      return (
-        <div className="card-layout-3">
-          <div className="card">{conditions[2]}</div>
-          <div className="bottom-row">
-            <div className="card">{conditions[0]}</div>
-            <div className="card">{conditions[1]}</div>
+    const items = [];
+    for (let i = 0; i < conditions.length; i++) {
+      items.push(
+        <div key={`card-${i}`} className="card">{conditions[i]}</div>
+      );
+      if (i < conditions.length - 1) {
+        items.push(
+          <div key={`sep-${i}`} className="separator">∩</div>
+        );
+      }
+    }
+    return <div className="card-vertical-container">{items}</div>;
+  };
+
+  const renderPlayerCounters = () => {
+    const counters = [];
+    for (let i = 0; i < playerCount; i++) {
+      counters.push(
+        <div key={i} className="player-counter-box">
+          <div className="score-box">プレイヤー{i + 1}: {playerScores[i] || 0}点</div>
+          <div className="button-column">
+            <button className="score-button" onClick={() => handleScoreChange(i, +1)}>＋</button>
+            <button className="score-button" onClick={() => handleScoreChange(i, -1)}>－</button>
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="card-container">
-          {conditions.map((cond, idx) => (
-            <div key={idx} className="card">{cond}</div>
-          ))}
-        </div>
-      );
     }
+    return <div className="player-counter-container">{counters}</div>;
   };
 
   return (
     <div className="App">
-      <h1>カード条件ゲーム</h1>
+      <h1>∩ゲーム</h1>
 
       <div className="selector">
         <label>カード枚数: </label>
@@ -98,6 +115,23 @@ export default function App() {
         </select>
       </div>
 
+      <div className="selector">
+        <label>プレイヤー人数: </label>
+        <select
+          value={playerCount}
+          onChange={(e) => {
+            const count = Number(e.target.value);
+            setPlayerCount(count);
+            setPlayerScores(Array(count).fill(0));
+          }}
+        >
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+        </select>
+      </div>
+
       <div className="cards-wrapper">
         {renderCards()}
       </div>
@@ -108,6 +142,8 @@ export default function App() {
       >
         回答！
       </button>
+
+      {renderPlayerCounters()}
 
       {eventMessage && (
         <div className="event-popup">{eventMessage}</div>
