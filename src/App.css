@@ -110,8 +110,6 @@ body {
   background-color: #1d4ed8;
 }
 .player-counter-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem 4rem; /* 行：1.5rem, 列：2rem */
   justify-items: center;
   margin-top: 2rem;
@@ -156,4 +154,24 @@ body {
 
 .score-button:hover {
   background-color: #047857; /* emerald-700 */
+}
+.player-counter-container.row-layout {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* モバイル用に折り返し可 */
+  margin-top: 1.5rem;
+}
+.player-counter-box {
+  background-color: #10b981; /* 統一感ある緑色 */
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: auto;
+  width: auto;
+  height: auto;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }

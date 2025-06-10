@@ -88,7 +88,7 @@ export default function App() {
     for (let i = 0; i < playerCount; i++) {
       counters.push(
         <div key={i} className="player-counter-box">
-          <div className="score-box">プレイヤー{i + 1}: {playerScores[i] || 0}点</div>
+          <div className="score-box">{playerScores[i] || 0}点</div>
           <div className="button-column">
             <button className="score-button" onClick={() => handleScoreChange(i, +1)}>＋</button>
             <button className="score-button" onClick={() => handleScoreChange(i, -1)}>－</button>
@@ -96,7 +96,7 @@ export default function App() {
         </div>
       );
     }
-    return <div className="player-counter-container">{counters}</div>;
+    return <div className="player-counter-container row-layout">{counters}</div>;
   };
 
   return (
