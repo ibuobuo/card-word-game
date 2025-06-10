@@ -76,7 +76,7 @@ export default function App() {
       );
       if (i < conditions.length - 1) {
         items.push(
-          <div key={`sep-${i}`} className="separator">∩</div>
+          <div key={`sep-${i}`} className="separator" style={{ fontSize: "2rem" }}>∩</div>
         );
       }
     }
@@ -136,12 +136,14 @@ export default function App() {
         {renderCards()}
       </div>
 
-      <button
-        onClick={handleAnswer}
-        className="answer-button"
-      >
-        回答！
-      </button>
+      <div style={{ marginTop: "2rem" }}>
+        <button
+          onClick={handleAnswer}
+          className="answer-button"
+        >
+          回答！
+        </button>
+      </div>
 
       {renderPlayerCounters()}
 
